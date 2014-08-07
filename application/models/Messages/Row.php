@@ -60,7 +60,7 @@ class Row extends \Bluz\Db\Row
         $this->addValidator(
             'message',
             v::required(),
-            v::callback(function ($input){echo $input;die;
+            v::callback(function ($input){
                 if(empty($input)){
                     return false;
                 }
