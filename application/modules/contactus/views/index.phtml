@@ -1,0 +1,40 @@
+<?php
+/**
+ * @var \Bluz\View\View $this
+ */
+?>
+<form action="<?=$this->url('contactus', 'crud')?>" class="form-horizontal" method="POST">
+    <div>
+        <h3><?=__('Contact Us')?></h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="form-group">
+                <label class="control-label col-lg-2" for="name"><?=__('Name')?></label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="name" name="userName"  />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2" for="email"><?=__('Email')?></label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="email" name="userEmail"  />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2" for="message"><?=__('Message')?></label>
+                <div class="col-lg-10">
+                    <textarea  rows="12" cols="26" class="form-control" id="message" name="message"  ></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary"><?=__('Save')?></button>
+    </div>
+</form>
