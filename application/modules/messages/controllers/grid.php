@@ -2,8 +2,8 @@
 /**
  * Grid of Contact Us
  *
- * User: Pashkova Elena
- * Date: 07-08-2014 5:18 PM
+ * @author Pashkova Elena
+ * @created 07-08-2014 5:18 PM
  */
 
 /**
@@ -12,11 +12,10 @@
 namespace Application;
 
 return
-    /**
-     * @privilege Management
-     * @return \closure
-     */
-    function () use ($view) {
+/**
+ * @return \closure
+ */
+    function () use ($view, $module, $controller) {
         /**
          * @var Bootstrap $this
          * @var \Bluz\View\View $view
@@ -29,18 +28,8 @@ return
             ]
         );
         $grid = new Messages\Grid();
+        $grid->setModule($module);
+        $grid->setController($controller);
 
-        $request = $this->getRequest();
-        $countCol = $request->getParam('countCol');
-
-        if ($countCol <> null) {
-            setcookie("countCol", $countCol, time() + 3600, '/');
-        } else {
-            $countCol = $request->getCookie('countCol', 4);
-        }
-
-        $lnCol = (integer)(12 / $countCol);
-        $view->countCol = $countCol;
-        $view->col = $lnCol;
         $view->grid = $grid;
     };

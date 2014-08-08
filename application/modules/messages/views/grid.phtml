@@ -1,6 +1,61 @@
 <?php
 /**
- * 
- * User: Pashkova Elena
- * Date: 07-08-2014 5:19 PM
- */ 
+ * @var \Bluz\Grid\Grid $grid
+ * @var \Bluz\View\View $this
+ *
+ * @author Pashkova Elena
+ * @created 07-08-2014 5:19 PM
+ */
+?>
+<script>
+    // use data-spy="grid" for use AJAX for reload grid
+    require(['bluz.grid']);
+</script>
+
+<div class="clearfix" data-spy="grid" data-grid="<?=$grid->getUid()?>">
+    <div>
+        <h3><?=__('Messages')?></h3>
+    </div>
+
+
+    <table class="table table-hover grid">
+        <thead>
+        <tr>
+            <th width="40px"><?=__('Id')?></th>
+            <th><a href="<?=$grid->order('userName')?:'#'?>"><?=__('User Name')?></a></th>
+            <th><a href="<?=$grid->order('userEmail')?:'#'?>"><?=__('Email')?></a></th>
+            <th><?=__('Message')?></th>
+            <th><a href="<?=$grid->order('created')?:'#'?>"><?=__('Created')?></a></th>
+            <th><?=__('Read')?></th>
+            <th><?=__('Answered')?></th>
+            <th width="96px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($grid->getData() as $row) :?>
+            <tr>
+                <td><?=$row['id']?></td>
+                <td><?=$row['userName']?></td>
+                <td><?=$row['userEmail']?></td>
+                <td><?=$row['message']?></td>
+                <td><?=$row['created']?></td>
+                <td><?=$row['isRead']?></td>
+                <td><?=$row['isAnswered']?></td>
+                <td class="controls">
+                    <a href="<?=$this->url('messages', 'save', ['id' => $row['id']])?>" class="btn btn-primary btn-xs dialog" data-ajax-method="get">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a href="<?=$this->url('messages', 'crud', ['id' => $row['id']])?>" class="confirm btn btn-xs btn-danger ajax" data-ajax-method="delete">
+                        <i class="fa fa-trash-o"></i>
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <?=$this->partial('grid/empty-rows.phtml', ['grid'=>$grid]) ?>
+    <?=$this->partial('grid/pagination.phtml', ['grid'=>$grid]) ?>
+    <?=$this->partial('grid/total.phtml', ['grid'=>$grid]) ?>
+
+</div>

@@ -1,0 +1,62 @@
+<?php
+
+$uid = uniqid('form_'); ?>
+
+    <form id="<?=$uid?>" action="<?=$this->url('messages', 'save')?>" class="form-horizontal ajax">
+        <input type="hidden" name="id" value="<?=$row->id?>"/>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><?=__('Edit message')?></h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="control-label col-lg-3" for="login"><?=__('User Name')?></label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="userName" name="userName" value="<?=$row->userName?>" maxlength="255" disabled />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-3" for="email"><?=__('Email')?></label>
+                <div class="col-lg-9">
+                    <input type="email" class="form-control" id="userEmail" name="userEmail" value="<?=$row->userEmail?>" maxlength="255" disabled />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-3" for="email"><?=__('Message')?></label>
+                <div class="col-lg-9">
+                    <textarea  rows="12" cols="26" class="form-control" id="message" name="message" disabled><?=$row->message?></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-3" for="email"><?=__('Created')?></label>
+                <div class="col-lg-9">
+                    <input type="email" id="created" class="form-control" name="created" value="<?=$row->created?>" disabled />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-3" for="email"><?=__('isRead')?></label>
+                <div class="col-lg-9">
+                    <input type="checkbox" id="isRead" name="isRead" value="1" <?=(!$row->isRead)?:'checked'; ?>  />
+                </div>
+            </div><!--
+            <div class="form-group">
+                <label class="control-label col-lg-3" for="email"><?=__('Reply')?></label>
+                <div class="col-lg-9">
+                    <textarea  rows="12" cols="26" class="form-control" id="reply" name="reply" value="" ></textarea>
+                </div>
+            </div>-->
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary"><?=__('Save')?></button>
+            <a href="#" class="btn btn-default" data-dismiss="modal"><?=__('Close')?></a>
+        </div>
+    </form>
+<?php
+// need for plain request
+if (isset($errors)) :
+    $data = json_encode(['errors'=>$errors]);
+    $this->headScript('require(["bluz.form"], function(form) {
+        form.notices($("#'.$uid.'"), '.$data.');
+    });');
+endif;
+?>

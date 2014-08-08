@@ -1,8 +1,8 @@
 <?php
 /**
  *
- * User: Pashkova Elena
- * Date: 06-08-2014 3:43 PM
+ * @author Pashkova Elena
+ * @created 06-08-2014 3:43 PM
  */
 
 /**

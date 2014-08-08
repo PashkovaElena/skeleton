@@ -15,6 +15,7 @@
                     <li <?=($this->module('index')?'class="active"':'')?>><?=$this->ahref('Home', ['index', 'index'])?></li>
                     <li <?=($this->module('dashboard')?'class="active"':'')?>><?=$this->ahref('Dashboard', ['dashboard', 'index'])?></li>
                     <li <?=($this->module('test')?'class="active"':'')?>><?=$this->ahref('Test', ['test', 'index'])?></li>
+                    <li <?=($this->module('messages')?'class="active"':'')?>><?=$this->ahref('Contact Us', ['messages', 'index'])?></li>
                 </ul>
                 <?php if ($identity = $this->user()) : ?>
                     <p class="navbar-text navbar-right">

@@ -1,8 +1,7 @@
 <?php
 /**
- * 
- * User: Pashkova Elena
- * Date: 06-08-2014 3:31 PM
+ * @author Pashkova Elena
+ * @created 08-08-2014 5:19 PM
  */
 namespace Application;
 
@@ -10,15 +9,15 @@ use Application\Messages;
 use Bluz\Controller;
 
 return
+/**
+ * @return \closure
+ */
+function () {
     /**
-     * @privilege Management
-     * @return mixed
+     * @var Bootstrap $this
      */
-    function () {
-        /**
-         * @var Bootstrap $this
-         */
-        $crudController = new Controller\Crud();
-        $crudController->setCrud(Messages\Crud::getInstance());
-        return $crudController();
-    };
+    $crudController = new Controller\Crud();
+    $crudController->setCrud(Messages\Crud::getInstance());
+
+    return $crudController();
+};
