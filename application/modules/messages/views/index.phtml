@@ -3,7 +3,7 @@
  * @var \Bluz\View\View $this
  */
 ?>
-<form action="<?=$this->url('messages', 'crud')?>" class="form-horizontal" method="POST">
+<form action="<?=$this->url('messages', 'index')?>" class="form-horizontal" method="POST">
     <div>
         <h3><?=__('Contact Us')?></h3>
     </div>
@@ -28,13 +28,81 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="control-label col-lg-2"></label>
                 <div class="col-lg-10">
+                    <?//=$recaptcha?>
 
+
+                    <script type="text/javascript"
+                            src="http://www.google.com/recaptcha/api/challenge?k=6Lf6X_gSAAAAAA-vhyxB4FnHxFFFrKxk_CEBZG8H">
+                    </script>
+                    <noscript>
+                        <iframe src="http://www.google.com/recaptcha/api/noscript?k=6Lf6X_gSAAAAAA-vhyxB4FnHxFFFrKxk_CEBZG8H"
+                                height="300" width="500" frameborder="0"></iframe><br>
+                        <textarea name="recaptcha_challenge_field" rows="3" cols="40">
+                        </textarea>
+                        <input type="hidden" name="recaptcha_response_field"
+                               value="manual_challenge">
+                    </noscript>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2"></label>
+                <div class="col-lg-10">
+                    <button type="submit" class="btn btn-primary" data-messages="true"><?=__('Save')?></button>
                 </div>
             </div>
         </div>
     </div>
-    <div>
-        <button type="submit" class="btn btn-primary"><?=__('Save')?></button>
-    </div>
 </form>
+<script>
+    require(['jquery'], function($) {
+
+           $('button').click(function(){
+            var recaptcha_challenge_field = $('[name="recaptcha_challenge_field"]').val();
+            var recaptcha_response_field = $('[name="recaptcha_response_field"]').val();
+
+            if(recaptcha_challenge_field === "" ||
+                recaptcha_response_field === ""){
+                    return false;
+            }
+
+
+            $.ajax({
+                type: 'post',
+                data: { privatekey: "<?=$privatekey ?>",
+                        remoteip : "<?=$ip ?>",
+                        recaptcha_challenge_field : challenge,
+                        recaptcha_response_field : response },
+                //url:  'http://www.google.com/recaptcha/api/verify',
+                url: '/messages/crud',
+                dataType: 'json',
+                success: function(data){
+                    Recaptcha.reload();
+                    console.log('success');
+                    console.log(data);
+
+                    require(['bluz.notify'], function(notify) {
+                        notify.set(<?=json_encode(app()->getMessages()->popAll())?>);
+                        //notify.set("1");
+                    });
+
+                    return false;
+                },
+                error: function(xhr){
+                    Recaptcha.reload();
+                    console.log(xhr);
+
+                    require(['bluz.notify'], function(notify) {
+                        notify.set(<?=json_encode(app()->getMessages()->popAll())?>);
+                        //notify.set("2");
+                    });
+
+                    return false;
+                }
+            });
+return false;
+
+    });
+});
+</script>

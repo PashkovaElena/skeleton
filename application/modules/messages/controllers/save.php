@@ -11,6 +11,7 @@ use Bluz\Controller;
 
 return
 /**
+ * @privilege Edit
  * @return \closure
  */
     function () {

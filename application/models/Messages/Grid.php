@@ -35,7 +35,7 @@ class Grid extends \Bluz\Grid\Grid
         $adapter->setSource('SELECT * FROM messages');
 
         $this->setAdapter($adapter);
-        $this->setDefaultLimit(25);
+        $this->setDefaultLimit(10);
         $this->setAllowOrders(['userName', 'userEmail', 'created', 'id']);
         $this->setAllowFilters(['userName', 'userEmail', 'message', 'id']);
         return $this;

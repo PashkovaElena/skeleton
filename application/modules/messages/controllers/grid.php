@@ -13,6 +13,7 @@ namespace Application;
 
 return
 /**
+ * @privilege Edit
  * @return \closure
  */
     function () use ($view, $module, $controller) {

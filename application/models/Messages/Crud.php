@@ -18,6 +18,7 @@ class Crud extends \Bluz\Crud\Table
 {
     public function createOne($data)
     {
+        parent::createOne($data);
         app()->redirectTo('messages', 'thanks');
     }
 }
